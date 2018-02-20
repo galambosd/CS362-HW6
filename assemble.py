@@ -25,10 +25,9 @@ if k > len(reads[0]):
 # build set of all k-mers
 kMers = []
 for read in reads:
-    for i in range(0, len(read)-k):
+    for i in range(0, len(read)-k+1):
         kMers.append(read[i:i+k])
 
-print(kMers)
 # build (k-1)mers?
 # create a class for our DB Graph?
 
