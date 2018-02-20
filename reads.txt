@@ -1,6 +1,5 @@
-
-simulate.py
-provided_data/sample.fasta
-1
-2
-0.5
+CAGCGAGAAA
+GAGAGAGAGA
+GAGTGAGAGA
+GAGGGAGAGA
+AAATCCAGTC

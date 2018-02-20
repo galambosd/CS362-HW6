@@ -23,29 +23,57 @@ except(AssertionError):
     exit(1)
 
 
-print(sys.argv)
 
-with open("reads.txt","w") as output:
-    for arg in sys.argv:
-        output.write("\n")
-        output.write(arg)
-    output.close()
 
+from random import randint
+from random import random
 #'parse' the FASTA file by just skipping the 1st line
 fasta.readline()
-fastaSeq = fasta.read().rstrip('\n')
+fastaSeq = fasta.read()
 fasta.close()
+fastaSeq = fastaSeq.replace("\n","").upper()
+
+print(fastaSeq)
+
+if len(fastaSeq) < readLength:
+    print("you want a read length greater than the sequence given.")
+    exit(1)
 
 # calculate N using G (length of FASTA), C (coverage), L (length of the reads)
+N = len(fastaSeq) * coverage // readLength
 # if it's not an int, round up
 
 # N times...
+reads = []
+for i in range(0,N):
     # choose a random index from the FASTA
+    start = randint(0,len(fastaSeq)-1-readLength)
+    read = ""
     # splice something of length L
+    for ch in fastaSeq[start:start+readLength]:
+        if random() < errorRate:
+            # add an error at a corresponding rate to the error rate
+            nucleotides = ["A","T","C","G"]
+            nucleotides.remove(ch)
+            # chooses a random other nucleotide
+            read += nucleotides[randint(0,2)]
+        else:
+            read += ch
     # add the read to our set of reads
+    reads.append(read)
+
+    
+    
+    
 
     #later...
-        # handle the edge case indices accordingly
+        # handle the edge case indices better
         # introduce the necessary frequency of errors before storing the read
 
 # output all of our reads into reads.txt
+with open("reads.txt","w") as output:
+    for read in reads:
+        
+        output.write(read)
+        output.write("\n")
+    output.close()
