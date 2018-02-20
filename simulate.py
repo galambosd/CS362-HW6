@@ -6,7 +6,7 @@ try:
     coverage = int(sys.argv[2])
     readLength = int(sys.argv[3])
     errorRate = float(sys.argv[4])
-    assert(errorRate < 1 and errorRate > 0)
+    assert(errorRate < 1 and errorRate >= 0)
 except(IndexError):
     print("""Too few arguments found.
           This file takes in a fasta file, a coverage value, 

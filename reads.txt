@@ -1,1 +1,6 @@
-simulate.py123
+
+simulate.py
+provided_data/sample.fasta
+1
+1
+0
