@@ -47,10 +47,11 @@ N = len(fastaSeq) * coverage // readLength
 reads = []
 for i in range(0,N):
     # choose a random index from the FASTA
-    start = randint(0,len(fastaSeq)-1-readLength)
+    start = randint(0,len(fastaSeq)-1)
     read = ""
     # splice something of length L
-    for ch in fastaSeq[start:start+readLength]:
+    end = min(start + readLength,len(fastaSeq))
+    for ch in fastaSeq[start:end]:
         if random() < errorRate:
             # add an error at a corresponding rate to the error rate
             nucleotides = ["A","T","C","G"]

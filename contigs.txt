@@ -1,4 +1,4 @@
 
 assemble.py
 reads.txt
-6
+12

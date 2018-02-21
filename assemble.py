@@ -18,16 +18,24 @@ reads = []
 for line in readFile.readlines():
     reads.append(line.rstrip('\n').upper())
 # check that k isn't longer than reads
-# assuming all reads same length
-if k > len(reads[0]):
+# throw out any that're too short
+
+usable = []
+for read in reads:
+    if k <= len(read):
+        usable.append(read)
+
+if usable == []:
     print("You tried to create k-mers that are longer than your reads.")
     exit(1)
+    
 # build set of all k-mers
 kMers = []
 for read in reads:
     for i in range(0, len(read)-k+1):
         kMers.append(read[i:i+k])
 
+#print(kMers)
 # build (k-1)mers?
 # create a class for our DB Graph?
 
@@ -44,7 +52,7 @@ for kMer in kMers:
         
 #We're gonna visualize this with dot now.
 
-
+print("Doing dot stuff")
 with open("graph.dot","w") as dotFile:
     dotFile.write("digraph DeBruijn{\n")
     for key in graph.keys():
