@@ -47,10 +47,14 @@ N = len(fastaSeq) * coverage // readLength
 reads = []
 for i in range(0,N):
     # choose a random index from the FASTA
-    start = randint(0,len(fastaSeq)-1)
+    start = randint(-readLength,len(fastaSeq)-1)
+    
     read = ""
     # splice something of length L
+    
     end = min(start + readLength,len(fastaSeq))
+    if start < 0:
+        start = 0
     for ch in fastaSeq[start:end]:
         if random() < errorRate:
             # add an error at a corresponding rate to the error rate
