@@ -4,4 +4,3 @@
 python3 assemble.py $@
 
 dot -Tpng graph.dot -o DeBruijnGraph.png
-OPEN DeBruijnGraph.png
