@@ -104,7 +104,7 @@ current = beginning
 rstring = beginning
 totalConnects = 0
 numNodes = 0
-
+inLoop = False
 while len(graph[current]) != 0:
     
     numConnects = -1
@@ -115,10 +115,18 @@ while len(graph[current]) != 0:
     if numNodes > 3:
         graph[current][nxt] -= totalConnects//numNodes
     if numNodes > k and totalConnects/numNodes * 1.6 < numConnects:
-        print("predicting loop at " , current)
-        print("avg: ", totalConnects/numNodes)
-        print("connections: ", numConnects)
+        if not inLoop:
+            print("predicting loop at " , current)
+            print("avg: ", totalConnects/numNodes)
+            print("connections: ", numConnects)
+        inLoop = True
+        
     else:
+        if inLoop:
+            print("we've exited a loop/are taking a loop. Hopefully we chose right.")
+            print(current)
+            print(nxt)
+            inLoop = False
         numNodes += 1
         totalConnects += numConnects
     current = nxt
