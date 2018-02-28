@@ -33,7 +33,7 @@ fastaSeq = fasta.read()
 fasta.close()
 fastaSeq = fastaSeq.replace("\n","").upper()
 
-print(fastaSeq)
+#print(fastaSeq)
 
 if len(fastaSeq) < readLength:
     print("you want a read length greater than the sequence given.")

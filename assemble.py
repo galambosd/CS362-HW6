@@ -31,8 +31,11 @@ if usable == []:
     
 # build set of all k-mers
 kMers = []
+possibleBeginnings = []
 for read in reads:
     for i in range(0, len(read)-k+1):
+        if i == 0:
+            possibleBeginnings.append(read[0:k-1])
         kMers.append(read[i:i+k])
 
 #print(kMers)
@@ -59,9 +62,9 @@ print("graph complete")
 
 beginnings = []
 
+print("searching for possible beginnings (our only n^2 step)")
 
-for key in graph:
-    
+for key in possibleBeginnings:
     isalone = True
     for kmer in graph:
         if key in graph[kmer]:
@@ -69,7 +72,7 @@ for key in graph:
             break
     if isalone:
         beginnings.append(key)
-        print(len(beginnings))
+        #print(len(beginnings))
 
 
 
@@ -119,16 +122,17 @@ while len(graph[current]) != 0:
         
     if numNodes > k and totalConnects/numNodes * 1.6 < numConnects:
         if not inLoop:
+            pass
             #print("predicting loop at " , current)
-            print("avg: ", totalConnects/numNodes)
-            print("connections: ", numConnects)
+            #print("avg: ", totalConnects/numNodes)
+            #print("connections: ", numConnects)
         inLoop = True
         
     else:
         if inLoop:
-            print("we've exited a loop/are taking a loop. Hopefully we chose right.")
-            print(current)
-            print(nxt)
+            #print("we've exited a loop/are taking a loop. Hopefully we chose right.")
+            #print(current)
+            #print(nxt)
             inLoop = False
         numNodes += 1
         totalConnects += numConnects
