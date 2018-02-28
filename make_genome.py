@@ -6,6 +6,7 @@ length = argv[1]
 nucleotides = ['A', 'C', 'T', 'G']
 
 genome = ''
+
 for i in range(0, int(length)):
     genome+= nucleotides[randint(0,3)]
 
