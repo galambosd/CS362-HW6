@@ -145,5 +145,6 @@ with open("contigs.txt","w") as rFile:
     rFile.write(rstring)
     rFile.close()
 
+print("Outputed best greedy contig to contigs.txt")
 
 
